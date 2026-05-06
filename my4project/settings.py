@@ -74,13 +74,15 @@ WSGI_APPLICATION = 'my4project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'student1db',
-        'USER': 'postgres',
-        'PASSWORD': 'aditya123',
-        'HOST': 'localhost',
+        'NAME': os.getenv('mydatadb'),
+        'USER': os.getenv('mydatadb_user'),
+        'PASSWORD': os.getenv('xcoCU0kNc3gUO7LtBRGdqZV55NWVsc3I'),
+        'HOST': os.getenv('dpg-d7tk02t0lvsc739ardg0-a'),
         'PORT': '5432',
     }
 }
