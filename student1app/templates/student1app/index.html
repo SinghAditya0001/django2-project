@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 0;
+            padding: 15px;
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* 🔥 Top bar responsive */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+        }
+
+        .add-btn {
+            background: #28a745;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 5px;
+        }
+
+        .search-box input {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-box button {
+            padding: 8px 10px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* 🔥 Table scroll on mobile */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        img {
+            border-radius: 5px;
+            max-width: 50px;
+            height: auto;
+        }
+
+        .action a {
+            margin: 2px;
+            text-decoration: none;
+            color: white;
+            padding: 5px 8px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .edit {
+            background: #007bff;
+        }
+
+        .delete {
+            background: #dc3545;
+        }
+
+        .pdf {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* 🔥 Mobile tweaks */
+        @media (max-width: 600px) {
+            h2 {
+                font-size: 20px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .search-box input {
+                flex: 1;
+                width: 100%;
+            }
+
+            .search-box button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>🎓 Student Management System</h2>
+
+<div class="container">
+
+    <div class="top-bar">
+        <a href="/add" class="btn add-btn">+ Add Student</a>
+
+        <form method="GET" class="search-box">
+            <input type="text" name="q" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- 🔥 Table wrapper -->
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Course</th>
+                <th>PDF</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.course }}</td>
+
+                <td>
+                    {% if student.pdf %}
+                        <a class="pdf" href="{{ student.pdf.url }}" target="_blank">View</a>
+                    {% else %}
+                        No File
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if student.image %}
+                        <a href="{{ student.image.url }}" target="_blank">
+                            <img src="{{ student.image.url }}">
+                        </a>
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+
+                <td class="action">
+                    <a href="/update/{{ student.id }}" class="edit">Edit</a>
+                    <a href="/delete/{{ student.id }}" class="delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
