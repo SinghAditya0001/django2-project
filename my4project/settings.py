@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,12 +80,8 @@ WSGI_APPLICATION = 'my4project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('mydatadb'),
-        'USER': os.getenv('mydatadb_user'),
-        'PASSWORD': os.getenv('xcoCU0kNc3gUO7LtBRGdqZV55NWVsc3I'),
-        'HOST': os.getenv('dpg-d7tk02t0lvsc739ardg0-a'),
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
